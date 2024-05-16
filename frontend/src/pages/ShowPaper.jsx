@@ -48,6 +48,10 @@ const ShowPaper = () => {
             <span>{paper.publishYear}</span>
           </div>
           <div className='my-4'>
+            <span className='text-xl mr-4 text-gray-500'>journal</span>
+            <span>{paper.journal}</span>
+          </div>
+          <div className='my-4'>
             <span className='text-xl mr-4 text-gray-500'>Create Time</span>
             <span>{new Date(paper.createdAt).toString()}</span>
           </div>

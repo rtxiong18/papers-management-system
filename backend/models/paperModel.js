@@ -14,6 +14,14 @@ const paperSchema = mongoose.Schema(
             type: Number,
             required: true,
         },
+        journal: {
+            type: String,
+            required: true,
+        },
+        paperImage: {
+            type: String,
+            required: true,
+        },
 
     },
     {

@@ -2,7 +2,7 @@ import { Link } from "react-router-dom"
 import { PiBookOpenTextLight } from 'react-icons/pi'
 import { BiUserCircle, BiShow } from 'react-icons/bi'
 import { AiOutlineEdit } from "react-icons/ai"
-import { BsInfoCircle } from "react-icons/bs"
+import { BsInfoCircle, BsFillMortarboardFill } from "react-icons/bs"
 import { MdOutlineDelete } from "react-icons/md"
 import { useState } from "react"
 import PaperModal from "./PaperModal"
@@ -26,6 +26,10 @@ const PapersSingleCard = ({ paper }) => {
             <div className="flex justify-start items-center gap-x-2">
                 <BiUserCircle className="text-red-300 text-2x1" />
                 <h2 className="my-1">{paper.author}</h2>
+            </div>
+            <div className="flex justify-start items-center gap-x-2">
+                <BsFillMortarboardFill className="text-red-300 text-2x1" />
+                <h2 className="my-1">{paper.journal}</h2>
             </div>
             <div className="flex justify-between items-center gap-x-2 mt-4 p-4">
                 <BiShow

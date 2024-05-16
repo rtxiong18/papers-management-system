@@ -1,18 +1,21 @@
 import express from 'express';
 import {Paper} from '../models/paperModel.js';
+import { uploadMiddleware } from '../middlewares/MulterMiddleware.js';
+import fs from 'fs';
 
 const router = express.Router();
 
 //create a new paper
-router.post('/', async (request, response) =>{
+router.post('/', uploadMiddleware.single('paperImage'), async (request, response) =>{
     try{
         if(
             !request.body.title ||
             !request.body.author ||
-            !request.body.publishYear
+            !request.body.publishYear ||
+            !request.body.journal
         ) {
             return response.status(400).send({
-                message: 'Send all required fields: title, author, publishYear',
+                message: 'Send all required fields: title, author, publishYear, journal',
             });
         }
 
@@ -20,6 +23,8 @@ router.post('/', async (request, response) =>{
             title: request.body.title,
             author: request.body.author,
             publishYear: request.body.publishYear,
+            journal: request.body.journal,
+            paperImage: request.file.originalname 
         };
 
         const paper = await Paper.create(newPaper);
@@ -67,21 +72,31 @@ router.get('/:id', async (request, response) => {
 
 //update a paper
 
-router.put('/:id', async (request, response) => {
+router.put('/:id', uploadMiddleware.single('paperImage'), async (request, response) => {
     try{
         if(
             !request.body.title ||
             !request.body.author ||
-            !request.body.publishYear
+            !request.body.publishYear ||
+            !request.body.journal
         ) {
             return response.status(400).send({
-                message: 'Send all required fields: title, author, publishYear',
+                message: 'Send all required fields: title, author, publishYear, journal',
             });
         }
 
         const {id} = request.params;
 
-        const result = await Paper.findByIdAndUpdate(id, request.body);
+        const newPaper = {
+            title: request.body.title,
+            author: request.body.author,
+            publishYear: request.body.publishYear,
+            journal: request.body.journal,
+            paperImage: request.file.originalname 
+        };
+
+        const result = await Paper.findByIdAndUpdate(id, newPaper);
+        fs.unlinkSync(`./public/uploads/${result.paperImage}`);
         
         if(!result){
             return response.status(404).json({message: 'Paper not found'});
@@ -104,6 +119,8 @@ router.delete('/:id', async (request, response) => {
         const {id} = request.params;
         
         const result = await Paper.findByIdAndDelete(id);
+
+        fs.unlinkSync(`./public/uploads/${result.paperImage}`);
 
         if(!result){
             return response.status(404).json({message: 'Paper not found'});

@@ -16,6 +16,9 @@ const PapersTable = ({ papers }) => {
           <th className='border border-slate-600 rounded-md max-md:hidden'>
             Publish Year
           </th>
+          <th className='border border-slate-600 rounded-md max-md:hidden'>
+            Journal
+          </th>
           <th className='border border-slate-600 rounded-md'>Operations</th>
         </tr>
       </thead>
@@ -33,6 +36,9 @@ const PapersTable = ({ papers }) => {
             </td>
             <td className='border border-slate-700 rounded-md text-center max-md:hidden'>
               {paper.publishYear}
+            </td>
+            <td className='border border-slate-700 rounded-md text-center max-md:hidden'>
+              {paper.journal}
             </td>
             <td className='border border-slate-700 rounded-md text-center'>
               <div className='flex justify-center gap-x-4'>

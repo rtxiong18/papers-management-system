@@ -1,5 +1,5 @@
 import { AiOutlineClose } from "react-icons/ai"
-import { PiBookOpenTextLight } from "react-icons/pi"
+import { PiBookOpenTextLight, PiCalendarBlank, PiBook } from "react-icons/pi"
 import { BiUserCircle } from "react-icons/bi"
 
 
@@ -17,27 +17,31 @@ const PaperModal = ({ paper, onClose }) => {
                     className="absolute right-6 top-6 text-3x1 text-red-600 cursor-pointer"
                     onClick={onClose}
                 />
-                <h2 className='w-fit px-4 py-1 bg-red-300 rounded-lg'>
-                    {paper.publishYear}
-                </h2>
-                <h4 className='my-2 text-gray-500'>{paper._id}</h4>
                 <div className="flex justify-start items-center gap-x-2">
                     <PiBookOpenTextLight className="text-red-300 text-2x1" />
                     <h2 className="my-1">{paper.title}</h2>
                 </div>
                 <div className="flex justify-start items-center gap-x-2">
+                    <PiCalendarBlank className="text-red-300 text-2x1" />
+                    <h2 className="my-1">{paper.publishYear}</h2>
+                </div>
+                <div className="flex justify-start items-center gap-x-2">
                     <BiUserCircle className="text-red-300 text-2x1" />
                     <h2 className="my-1">{paper.author}</h2>
                 </div>
-                <p className="mt-4">The front page of the paper</p>
-                <p className="my-2">
+                <div className="flex justify-start items-center gap-x-2">
+                    <PiBook className="text-red-300 text-2x1" />
+                    <h2 className="my-1">{paper.journal}</h2>
+                </div>
+                <img className='object-fill h-48 w-96' src= {`http://localhost:5555/uploads/${paper.paperImage}`} alt="the front page" />
+                {/* <p className="my-2">
                     Lorem ipsum dolor sit amet consectetur adipisicing elit. Magni quia
                     voluptatum sint. Nisi impedit libero eveniet cum vitae qui expedita
                     necessitatibus assumenda laboriosam, facilis iste cumque a pariatur
                     nesciunt cupiditate voluptas? Quis atque earum voluptate dolor nisi
                     dolorum est? Deserunt placeat cumque quo dicta architecto, dolore
                     vitae voluptate sequi repellat!
-                </p>
+                </p> */}
 
             </div>
 
