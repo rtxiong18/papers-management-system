@@ -29,4 +29,18 @@ const paperSchema = mongoose.Schema(
     }
 )
 
+const userSchema = mongoose.Schema(
+    {
+        email: {
+            type: String,
+            required: true,
+        },
+        password: {
+            type: String,
+            required: true,
+        }
+    }
+)
+
 export const Paper = mongoose.model('Paper', paperSchema);
+export const User = mongoose.model('User', userSchema);

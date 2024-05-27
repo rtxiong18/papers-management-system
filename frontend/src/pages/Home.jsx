@@ -7,6 +7,7 @@ import { BsInfoCircle } from 'react-icons/bs'
 import { MdOutlineAddBox, MdOutlineDelete } from 'react-icons/md'
 import PapersTable from '../components/home/PapersTable'
 import PapersCard from '../components/home/PapersCard'
+import MenuButton from '../components/MenuButton'
 
 const Home = () => {
     const [papers, setPapers] = useState([]);
@@ -28,6 +29,7 @@ const Home = () => {
 
     return (
         <div className='p-4'>
+            <MenuButton />
             <div className='flex justify-center items-center gap-x-4'>
                 <button className='bg-sky-300 hover:bg-sky-300 px-4 py-1 rounded-lg' onClick={() => setShowType('table')}>
                     Table

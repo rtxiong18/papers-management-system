@@ -47,7 +47,7 @@ const EditPaper = () => {
       .then(() => {
         setLoading(false);
         enqueueSnackbar('Paper edited successfully', {variant: 'success'})
-        navigate('/');
+        navigate('/papers/home');
       })
       .catch((error) => {
         setLoading(false);

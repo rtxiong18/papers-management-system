@@ -39,7 +39,7 @@ const CreatePapers = () => {
       .then(() => {
         setLoading(false);
         enqueueSnackbar('Paper Created successfully', {variant: 'success'});
-        navigate('/');
+        navigate('/papers/home');
       })
       .catch((error) => {
         setLoading(false);

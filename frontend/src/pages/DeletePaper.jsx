@@ -18,7 +18,7 @@ const DeletePaper = () => {
     .then(() => {
       setLoading(false);
       enqueueSnackbar('Paper deleted successfully', {variant: 'success'});
-      navigate('/');
+      navigate('/papers/home');
     })
     .catch((error) => {
       setLoading(false);

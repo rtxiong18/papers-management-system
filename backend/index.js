@@ -2,6 +2,7 @@ import express from "express";
 import { PORT, mongoDBURL } from "./config.js";
 import mongoose from "mongoose";
 import paperRoute from './routes/paperRoute.js';
+import userRoute from './routes/userRoute.js';
 import cors from 'cors';
 
 
@@ -27,6 +28,7 @@ app.get('/', (request, response) => {
 });
 
 app.use('/papers', paperRoute);
+app.use('/user', userRoute);
 
 mongoose. connect(mongoDBURL)
     .then(() =>{
