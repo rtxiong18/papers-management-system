@@ -9,16 +9,16 @@ import { useSnackbar } from 'notistack'
 const DeletePaper = () => {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
-  const {id} = useParams();
+  const {id, email} = useParams();
   const {enqueueSnackbar} = useSnackbar();
   const handleDeletePaper = () => {
     setLoading(true);
     axios
-    .delete(`http://localhost:5555/papers/${id}`)
+    .delete(`http://localhost:5555/${email}/${id}`)
     .then(() => {
       setLoading(false);
       enqueueSnackbar('Paper deleted successfully', {variant: 'success'});
-      navigate('/papers/home');
+      navigate(`/${email}`);
     })
     .catch((error) => {
       setLoading(false);

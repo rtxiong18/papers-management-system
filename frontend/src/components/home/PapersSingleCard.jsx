@@ -36,13 +36,13 @@ const PapersSingleCard = ({ paper }) => {
                     className="text-3x1 text-blue-800 hover:text-black cursor-pointer"
                     onClick={() => setShowModal(true)}
                 />
-                <Link to={`/papers/details/${paper._id}`}>
+                <Link to={`/${paper.email}/details/${paper._id}`}>
                     <BsInfoCircle className="text-2x1 text-green-800 hover:text-black" />
                 </Link>
-                <Link to={`/papers/edit/${paper._id}`}>
+                <Link to={`/${paper.email}/edit/${paper._id}`}>
                     <AiOutlineEdit className="text-2x1 text-yellow-600 hover:text-black" />
                 </Link>
-                <Link to={`/papers/delete/${paper._id}`}>
+                <Link to={`/${paper.email}/delete/${paper._id}`}>
                     <MdOutlineDelete className="text-2x1 text-red-600 hover:text-black" />
                 </Link>
 

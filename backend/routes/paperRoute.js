@@ -6,7 +6,7 @@ import fs from 'fs';
 const router = express.Router();
 
 //create a new paper
-router.post('/', uploadMiddleware.single('paperImage'), async (request, response) =>{
+router.post('/:email', uploadMiddleware.single('paperImage'), async (request, response) =>{
     try{
         if(
             !request.body.title ||
@@ -19,7 +19,10 @@ router.post('/', uploadMiddleware.single('paperImage'), async (request, response
             });
         }
 
+        const {email} = request.params;
+
         const newPaper = {
+            email: email,
             title: request.body.title,
             author: request.body.author,
             publishYear: request.body.publishYear,
@@ -39,9 +42,11 @@ router.post('/', uploadMiddleware.single('paperImage'), async (request, response
 })
 
 //get all papers
-router.get('/', async (request, response) => {
+router.get('/:email', async (request, response) => {
     try{
-        const papers = await Paper.find({});
+        const {email} = request.params;
+
+        const papers = await Paper.find({email: email});
 
         return response.status(200).json({
             count: papers.length,
@@ -55,12 +60,13 @@ router.get('/', async (request, response) => {
 });
 
 //get one paper from database by id
-router.get('/:id', async (request, response) => {
+router.get('/:email/:id', async (request, response) => {
     try{
 
-        const {id} = request.params;
+        const {email, id} = request.params;
 
-        const paper = await Paper.findById(id);
+        //const paper = await Paper.findById(id);
+        const paper = await Paper.find({email: email, _id: id});
 
         return response.status(200).json(paper);
     }
@@ -72,7 +78,7 @@ router.get('/:id', async (request, response) => {
 
 //update a paper
 
-router.put('/:id', uploadMiddleware.single('paperImage'), async (request, response) => {
+router.put('/:email/:id', uploadMiddleware.single('paperImage'), async (request, response) => {
     try{
         if(
             !request.body.title ||
@@ -85,7 +91,7 @@ router.put('/:id', uploadMiddleware.single('paperImage'), async (request, respon
             });
         }
 
-        const {id} = request.params;
+        const {email, id} = request.params;
 
         const newPaper = {
             title: request.body.title,
@@ -95,7 +101,7 @@ router.put('/:id', uploadMiddleware.single('paperImage'), async (request, respon
             paperImage: request.file.originalname 
         };
 
-        const result = await Paper.findByIdAndUpdate(id, newPaper);
+        const result = await Paper.findOneAndUpdate({email:email, _id: id}, newPaper);
         fs.unlinkSync(`./public/uploads/${result.paperImage}`);
         
         if(!result){
@@ -114,11 +120,11 @@ router.put('/:id', uploadMiddleware.single('paperImage'), async (request, respon
 
 // delete a paper
 
-router.delete('/:id', async (request, response) => {
+router.delete('/:email/:id', async (request, response) => {
     try{
-        const {id} = request.params;
+        const {email, id} = request.params;
         
-        const result = await Paper.findByIdAndDelete(id);
+        const result = await Paper.findOneAndDelete({email: email, _id: id});
 
         fs.unlinkSync(`./public/uploads/${result.paperImage}`);
 
@@ -135,5 +141,26 @@ router.delete('/:id', async (request, response) => {
         response.status(500).send({message: error.message});
     }
 });
+
+//delete a all papers of a user
+
+// router.delete('/:email', async (request, response) => {
+//     try{
+//         const {email} = request.params;
+        
+
+//         Paper.deleteMany({email:email})
+//         .then(()=>{
+//             response.status(200).json('Papers deleted')
+//         })
+
+
+//     }
+
+//     catch(error){
+//         console.log(error.message);
+//         response.status(500).send({message: error.message});
+//     }
+// });
 
 export default router;

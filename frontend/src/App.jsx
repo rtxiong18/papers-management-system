@@ -15,13 +15,13 @@ function App() {
     <Routes>
       <Route path = '/' element = {<Login/>}/>
       <Route path = '/user/register' element = {<Register/>}/>
-      <Route path = '/user/deleteuser' element = {<DeleteUser/>}/>
-      <Route path = '/user/changepassword' element = {<ChangePassword/>}/>
-      <Route path = '/papers/home' element = {<Home/>}/>
-      <Route path = '/papers/create' element = {<CreatePapers/>}/>
-      <Route path = '/papers/details/:id' element = {<ShowPaper/>}/>
-      <Route path = '/papers/edit/:id' element = {<EditPaper/>}/>
-      <Route path = '/papers/delete/:id' element = {<DeletePaper/>}/>
+      <Route path = '/:email/deleteuser' element = {<DeleteUser/>}/>
+      <Route path = '/:email/changepassword' element = {<ChangePassword/>}/>
+      <Route path = '/:email' element = {<Home/>}/>
+      <Route path = '/:email/create' element = {<CreatePapers/>}/>
+      <Route path = '/:email/details/:id' element = {<ShowPaper/>}/>
+      <Route path = '/:email/edit/:id' element = {<EditPaper/>}/>
+      <Route path = '/:email/delete/:id' element = {<DeletePaper/>}/>
     </Routes>
   )
 }

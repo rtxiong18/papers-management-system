@@ -23,7 +23,7 @@ const Login = () => {
             .then(res => {
                 if (res.data === "success") {
                     enqueueSnackbar('Login success', { variant: 'success' });
-                    navigate('/papers/home');
+                    navigate(`/${data.email}`);
                 }
                 else {
                     enqueueSnackbar('Email or password wrong', { variant: 'wrong' });

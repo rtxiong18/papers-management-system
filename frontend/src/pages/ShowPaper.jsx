@@ -7,14 +7,14 @@ import Spinner from '../components/Spinner';
 const ShowPaper = () => {
   const [paper, setPaper] = useState({});
   const [loading, setLoading] = useState(false);
-  const { id } = useParams();
+  const { email, id } = useParams();
 
   useEffect(() => {
     setLoading(true);
     axios
-      .get(`http://localhost:5555/papers/${id}`)
+      .get(`http://localhost:5555/${email}/${id}`)
       .then((response) => {
-        setPaper(response.data);
+        setPaper(response.data[0]);
         setLoading(false);
       })
       .catch((error) => {
@@ -59,6 +59,7 @@ const ShowPaper = () => {
             <span className='text-xl mr-4 text-gray-500'>Last Update Time</span>
             <span>{new Date(paper.updatedAt).toString()}</span>
           </div>
+          <img className='object-fill h-48 w-96' src= {`http://localhost:5555/uploads/${paper.paperImage}`} alt="the front page" />
         </div>
       )}
     </div>

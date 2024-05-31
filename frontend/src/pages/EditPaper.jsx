@@ -14,18 +14,18 @@ const EditPaper = () => {
 
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
-  const {id} = useParams();
+  const {id, email} = useParams();
   const {enqueueSnackbar} = useSnackbar();
 
   useEffect(() => {
     setLoading(true);
-    axios.get(`http://localhost:5555/papers/${id}`)
+    axios.get(`http://localhost:5555/${email}/${id}`)
     .then((response) => {
-      setAuthor(response.data.author);
-      setPublishYear(response.data.publishYear);
-      setTitle(response.data.title);
-      setJournal(response.data.journal);
-      setFileName(response.data.fileName);
+      setAuthor(response.data[0].author);
+      setPublishYear(response.data[0].publishYear);
+      setTitle(response.data[0].title);
+      setJournal(response.data[0].journal);
+      setFileName(response.data[0].fileName);
       setLoading(false);
     }).catch((error) => {
       setLoading(false);
@@ -41,13 +41,19 @@ const EditPaper = () => {
     formData.append('publishYear', publishYear);
     formData.append('journal', journal);
     formData.append('paperImage', fileName);
+    // const data = {
+    //   title,
+    //   author,
+    //   publishYear,
+    //   journal,
+    // };
     setLoading(true);
     axios
-      .put(`http://localhost:5555/papers/${id}`, formData)
+      .put(`http://localhost:5555/${email}/${id}`, formData)
       .then(() => {
         setLoading(false);
         enqueueSnackbar('Paper edited successfully', {variant: 'success'})
-        navigate('/papers/home');
+        navigate(`/${email}`);
       })
       .catch((error) => {
         setLoading(false);

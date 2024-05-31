@@ -34,7 +34,7 @@ const Register = () => {
           }
           else{
             enqueueSnackbar('User registered', { variant: 'success' });
-            navigate('/papers/home');
+            navigate(`/${data.email}`);
           }
           setLoading(false);
       }

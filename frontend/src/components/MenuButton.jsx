@@ -1,9 +1,10 @@
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { BsList } from 'react-icons/bs';
 import { useState } from 'react';
 
 const MenuButton = () => {
   const [isClick, setIsClick] = useState(false);
+  const {email} = useParams();
   return (
     <div>
       <button onClick={() => setIsClick((prev) => !prev)}>
@@ -14,13 +15,13 @@ const MenuButton = () => {
           <ul className='flex flex-col gap-4'>
             <li>
               <Link
-                to={'/user/changepassword'}
+                to={`/${email}/changepassword`}
               >Change password
               </Link>
             </li>
             <li>
               <Link
-                to={'/user/deleteuser'}
+                to={`/${email}/deleteuser`}
               >Delete user
               </Link>
             </li>

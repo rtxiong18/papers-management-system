@@ -1,11 +1,14 @@
 import { Link } from 'react-router-dom';
 import { BsArrowLeft } from 'react-icons/bs';
+import { useParams } from 'react-router-dom';
 
-const BackButton = ({ destination = '/papers/home' }) => {
+const BackButton = () => {
+  const {email} = useParams();
+
   return (
     <div className='flex'>
       <Link
-        to={destination}
+        to={`/${email}`}
         className='bg-sky-800 text-white px-4 py-1 rounded-lg w-fit'
       >
         <BsArrowLeft className='text-2xl' />

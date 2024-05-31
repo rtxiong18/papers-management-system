@@ -1,19 +1,20 @@
 import React from 'react'
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 
 const DropdownMenu = () => {
+    const {email} = useParams();
     return (
         <div className='flex flex-col'>
             <ul className='flex flex-col gap-4'>
                 <li>
                     <Link
-                        to={'/user/changepassword'}
+                        to={`/changepassword`}
                     >Change password
                     </Link>
                 </li>
                 <li>
                     <Link
-                        to={'/user/deleteuser'}
+                        to={`/${email}/deleteuser`}
                     >Delete user
                     </Link>
                 </li>

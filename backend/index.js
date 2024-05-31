@@ -27,7 +27,7 @@ app.get('/', (request, response) => {
 
 });
 
-app.use('/papers', paperRoute);
+app.use('/', paperRoute);
 app.use('/user', userRoute);
 
 mongoose. connect(mongoDBURL)

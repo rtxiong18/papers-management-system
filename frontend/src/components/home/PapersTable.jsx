@@ -42,13 +42,13 @@ const PapersTable = ({ papers }) => {
             </td>
             <td className='border border-slate-700 rounded-md text-center'>
               <div className='flex justify-center gap-x-4'>
-                <Link to={`/papers/details/${paper._id}`}>
+                <Link to={`/${paper.email}/details/${paper._id}`}>
                   <BsInfoCircle className='text-2xl text-green-800' />
                 </Link>
-                <Link to={`/papers/edit/${paper._id}`}>
+                <Link to={`/${paper.email}/edit/${paper._id}`}>
                   <AiOutlineEdit className='text-2xl text-yellow-600' />
                 </Link>
-                <Link to={`/papers/delete/${paper._id}`}>
+                <Link to={`/${paper.email}/delete/${paper._id}`}>
                   <MdOutlineDelete className='text-2xl text-red-600' />
                 </Link>
               </div>

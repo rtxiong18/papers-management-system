@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import BackButton from '../components/BackButton'
 import Spinner from '../components/Spinner'
 import axios from 'axios'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import { useSnackbar } from 'notistack'
 
 const CreatePapers = () => {
@@ -14,6 +14,7 @@ const CreatePapers = () => {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const {enqueueSnackbar} = useSnackbar();
+  const {email} = useParams();
   // const onChangeFile = e => {
   //   setFileName(e.target.files[0]);
   // }
@@ -35,11 +36,11 @@ const CreatePapers = () => {
 
     setLoading(true);
     axios
-      .post(`http://localhost:5555/papers`, formData)
+      .post(`http://localhost:5555/${email}`, formData)
       .then(() => {
         setLoading(false);
         enqueueSnackbar('Paper Created successfully', {variant: 'success'});
-        navigate('/papers/home');
+        navigate(`/${email}`);
       })
       .catch((error) => {
         setLoading(false);

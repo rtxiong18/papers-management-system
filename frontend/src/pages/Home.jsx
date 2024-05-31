@@ -8,15 +8,17 @@ import { MdOutlineAddBox, MdOutlineDelete } from 'react-icons/md'
 import PapersTable from '../components/home/PapersTable'
 import PapersCard from '../components/home/PapersCard'
 import MenuButton from '../components/MenuButton'
+import { useNavigate, useParams } from 'react-router-dom'
 
 const Home = () => {
     const [papers, setPapers] = useState([]);
     const [loading, setLoading] = useState(false);
     const [showType, setShowType] = useState('table');
+    const {email} = useParams();
     useEffect(() => {
         setLoading(true);
         axios
-            .get('http://localhost:5555/papers')
+            .get(`http://localhost:5555/${email}`)
             .then((response) => {
                 setPapers(response.data.data);
                 setLoading(false);
@@ -40,7 +42,7 @@ const Home = () => {
             </div>
             <div className='flex justify-between items-center'>
                 <h1 className='text-3xl my-8'>Papers List</h1>
-                <Link to='/papers/create'>
+                <Link to={`/${email}/create`}>
                     <MdOutlineAddBox className='text-sky-800 text-4xl' />
                 </Link>
             </div>
